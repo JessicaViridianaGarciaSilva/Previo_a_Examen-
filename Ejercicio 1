@@ -1,0 +1,31 @@
+create table alumnos_tesoem(
+id_alumno number (4) constraint pk_id_alumno primary key,
+matricula number (15) not null, constraint uq_matricula unique(matricula),
+nombre_alumno  nvarchar2 (30) not null,
+paterno_alumno nvarchar2   (10) not null,
+materno_alumno nvarchar2 (10) not null,
+carrera nvarchar2 (30) not null,
+grupo   char (10) not null,
+semestre  nvarchar2 (10) not null,
+edificio  nvarchar2 (2) not null,
+promedio nvarchar2 (6) not null
+);
+
+SELECT*FROM alumnos_tesoem;
+drop table alumnos_tesoem;
+truncate table alumnos_tesoem;
+
+create or replace procedure pa_insertar_alumnos 
+(a_id_alumno number default 0, a_matricula number default 0000000000, a_nombre_alumno nvarchar2 default 'desconocid',
+ a_paterno_alumno nvarchar2 default 'desconocid', a_materno_alumno nvarchar2 default 'desconocid', a_carrera nvarchar2 default 'desconocid',
+ a_grupo char default 'desconcido', a_semestre nvarchar2 default 'desconocid', a_edificio nvarchar2 default 'A', a_promedio nvarchar2 default 00.00 )
+as
+begin
+insert into alumnos_tesoem values (a_id_alumno,a_matricula,a_nombre_alumno,  a_paterno_alumno, a_materno_alumno, a_carrera,a_grupo, a_semestre, a_edificio,a_promedio );
+end;
+EXECUTE pa_insertar_alumnos;
+EXECUTE pa_insertar_alumnos(1,206020023,'Jessica Viridiana','Garcia','Silva','Sistemas Computacionales','6S12','Sexto','B','95.45');
+EXECUTE pa_insertar_alumnos(2,220020068,'Carlos Miguel','Flores','Corona','Gastronomia','2G11','Segundo','C','93');
+EXECUTE pa_insertar_alumnos(3,201020009,'Shirley','Cabrera','Cabrera', 'Contador Publico','6C11','Sexto','I','81');
+
+SELECT*FROM alumnos_tesoem;
